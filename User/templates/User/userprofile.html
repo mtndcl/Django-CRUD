@@ -1,0 +1,128 @@
+{% load static from staticfiles %}
+
+<!DOCTYPE html>
+<html>
+	 <head>
+  	<link rel="stylesheet" href="{% static 'styles.css' %}">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>
+      Register
+    </title>
+  </head>
+
+  <body>
+     <nav class="navbar navbar-expand-lg navbar-dark">
+      <a class="navbar-brand" href="#">MyApp</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+              <img src="{{spying_user.profile.image.url}}" height="40" width="40">
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="#">{{spying_user.first_name}} <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="#">{{spying_user.last_name}} <span class="sr-only">(current)</span></a>
+            </li>
+
+            
+          
+        </ul>
+        <span class="navbar-text">
+          <div class="btn-group mr-2" role="group" aria-label="Third group">
+             <button type="button" class="btn btn-secondary"  onclick="location.href='{% url 'profile-page' %}'">
+              Home
+             </button>
+        </div>
+        </span>
+      </div>
+    </nav>
+
+    <br>
+
+
+    <div  class="container">
+      
+
+
+      <div class="alert  alert-success">
+          
+          <p>Bio :  {{spying_user.profile.bio}}</p>
+      </div>
+
+      <div class="alert  alert-success">
+          
+          <p>Place :  {{spying_user.profile.location}}</p>
+      </div>
+       <div class="alert  alert-success">
+          
+          <p>Birth Day :  {{spying_user.profile.birth_date}}</p>
+      </div>
+    </div>
+
+
+
+    <div  class="alert alert-success">
+
+        <h1  class="text-center">All post of {{spying_user.first_name}}  {{spying_user.last_name}}</h1>
+      
+    </div>
+    {% for post in posts %}
+
+        
+        
+          <br>
+        <div class="container">
+            <div class="row align-items-center alert alert-success">
+
+
+     
+
+              <div class="col-sm-2">
+            
+                <div class="row align-items-center">
+
+                  <div class="col-6">
+
+                    <a href="{% url 'userprofile-page' slug=post.user.username %}"><img src="{{post.user.profile.image.url}}"  class="img-fluid"    ></a>
+                    
+                  </div>
+                  <div class="col-6">
+                    <p>{{post.user.first_name}}  {{post.user.last_name}}</p>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="col-sm-9 align-items-left">
+          
+                <p class="text-left" >DATE: {{post.date}}  {{post.time}} </p>
+                  <p  class="text-left" >{{post.posttext}}</p>
+              </div>
+        
+              <div class="col-sm-1">
+
+                {% if  post.user.username == user.username %}
+
+                  <button  class="btn btn-dark"  onclick="location.href='{% url 'deletepost-page' slug=post.id %}'">Remove</button>
+                  
+              {% endif %}
+
+                  
+              </div>
+        
+            </div>
+
+        </div>
+            
+        
+{% endfor %}
+  </body>
+</html>

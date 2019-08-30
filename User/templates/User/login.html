@@ -1,0 +1,83 @@
+
+{% load static from staticfiles %}
+
+<!DOCTYPE html>
+<html>
+	 <head>
+  	<link rel="stylesheet" href="{% static 'styles.css' %}">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>
+      Log in
+    </title>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+  		<a class="navbar-brand" href="#">LOGIN PAGE</a>
+  		<div class="collapse navbar-collapse" id="navbarTogglerDemo02 ">
+    		<ul class="navbar-nav mr-auto mt-2 mt-lg-0"></ul>
+   			<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+
+          <div class="btn-group mr-2" role="group" aria-label="Third group">
+             <button type="button" class="btn btn-secondary"  onclick="location.href='{% url 'register-page' %}'">
+              Sing Up
+             </button>
+        </div>
+          
+          <div class="btn-group mr-2" role="group" aria-label="Third group">
+              <button type="button" class="btn btn-secondary"  onclick="location.href='{% url 'home-page' %}'">
+               Home
+              </button>
+          </div>
+        </div>
+     </div>
+    </nav>
+
+
+    <br><br><br>
+
+    
+    <br><br><br>
+    <div class="row">
+
+      <div class="col-md-4"></div>
+
+      <div class="col-md-4">  
+
+        {% if messages %}
+          <div class="text-danger">
+            {% for message in messages %}
+
+             <div  class="alert alert-success">
+                <p>{{ message }}</p>
+               
+             </div>
+               
+            {% endfor %}
+          </div>
+        {% endif %}
+         
+        <form  method="POST">
+          {% csrf_token %}
+          
+          <div class="form-group ">
+            <br>
+            <input type="text" class="form-control" name="username" aria-describedby="emailHelp" placeholder="Username">
+          </div>
+          
+          <div class="form-group">
+            <br>
+            <input type="password" class="form-control" name="password" placeholder="Password" value="7Miyemedimi">
+          </div>
+
+         <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+      </div>
+  	</div>
+  </body>
+</html>
